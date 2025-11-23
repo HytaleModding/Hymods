@@ -4,7 +4,7 @@
         <div class="nav-inner">
             <!-- Left: Logo (Home button) -->
             <router-link to="/" class="brand" aria-label="Go to home">
-                <h1 class="logo">Hymods</h1>
+                <h1 class="logo">HyMods</h1>
             </router-link>
 
             <!-- Center cluster: Tabs + Search -->

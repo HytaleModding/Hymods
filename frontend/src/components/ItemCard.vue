@@ -12,29 +12,33 @@
         </div>
 
         <div class="info list-info">
-            <!-- Title row: older positioning (all left, inline) + icons -->
+            <!-- Title row -->
             <div class="title-row">
-                <h3 class="title">{{ title }}</h3>
-
                 <span class="type-badge">{{ type.toUpperCase() }}</span>
+                <h3 class="title">{{ title }}</h3>
 
                 <span class="creator">
                     <UserIcon class="icon sm" />
                     {{ author }}
                 </span>
 
-                <div class="tags-inline" v-if="tags?.length">
-                    <span v-for="tag in tags" :key="tag" class="tag small">
-                        {{ tag }}
+                <div class="tags-inline" v-if="tagObjects.length">
+                    <span
+                        v-for="tag in tagObjects"
+                        :key="tag.label"
+                        class="tag small"
+                    >
+                        <component :is="tag.icon" class="tag-icon" />
+                        {{ tag.label }}
                     </span>
                 </div>
             </div>
 
             <p v-if="description" class="desc">
-                {{ description }}
+                {{ truncatedDesc }}
             </p>
 
-            <!-- Stats bottom-left like older version, with icons from newer -->
+            <!-- Stats bottom-left -->
             <div class="stats list-stats">
                 <span class="stat">
                     <DownloadIcon class="icon sm" />
@@ -46,6 +50,27 @@
                     Updated {{ updated }}
                 </span>
             </div>
+        </div>
+
+        <!-- RIGHT ACTIONS (heart + favorite star) -->
+        <div class="actions-right" @click.stop>
+            <button
+                class="action-btn"
+                type="button"
+                aria-label="Like"
+                @click.stop="$emit('toggle-like')"
+            >
+                <HeartIcon class="icon md" />
+            </button>
+
+            <button
+                class="action-btn"
+                type="button"
+                aria-label="Favorite"
+                @click.stop="$emit('toggle-favorite')"
+            >
+                <StarIcon class="icon md" />
+            </button>
         </div>
     </article>
 
@@ -84,13 +109,18 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import {
     Download as DownloadIcon,
     RotateCw as RotateCwIcon,
     User as UserIcon,
+    Heart as HeartIcon,
+    Star as StarIcon,
+    Tag as TagIcon,
 } from "lucide-vue-next";
+import { TAGS } from "../assets/data/tags";
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
         type: "plugin" | "asset";
         display_mode?: "grid" | "list";
@@ -107,37 +137,53 @@ withDefaults(
     },
 );
 
+const tagObjects = computed(() => {
+    return (props.tags ?? []).map((t) => TAGS[t] ?? null).filter(Boolean);
+});
+
 defineEmits<{
     (e: "open"): void;
+    (e: "toggle-like"): void;
+    (e: "toggle-favorite"): void;
 }>();
+
+// limit description to 256 chars in list view
+const truncatedDesc = computed(() => {
+    const d = props.description ?? "";
+    if (props.display_mode !== "list") return d;
+    return d.length > 128 ? d.slice(0, 128) + "…" : d;
+});
 </script>
 
 <style scoped>
 /* ---------------- Shared card base ---------------- */
 .item-card {
     background: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
     display: flex;
+    position: relative;
 
     box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        0 12px 28px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
 
     transition:
         transform 0.12s ease,
         border-color 0.12s ease,
         box-shadow 0.12s ease;
+
+    min-height: 170px;
 }
 
 .item-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.16);
     box-shadow:
-        0 14px 32px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        0 16px 38px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* ---------------- Thumbnail ---------------- */
@@ -169,7 +215,7 @@ defineEmits<{
         rgba(255, 255, 255, 0.03);
 }
 
-/* ---------------- Icon fixes ---------------- */
+/* ---------------- Icon sizing / baseline fix ---------------- */
 .icon {
     stroke-width: 2.2;
     opacity: 0.9;
@@ -178,86 +224,107 @@ defineEmits<{
     flex-shrink: 0;
     line-height: 0;
 }
-.icon.sm {
+.icon.xs {
     width: 14px;
     height: 14px;
 }
+.icon.sm {
+    width: 18px;
+    height: 18px;
+}
 .icon.md {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
 }
 
 /* ---------------- Shared content ---------------- */
 .info {
-    padding: 14px 18px 16px;
+    padding: 16px 20px 18px;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
+    font-size: 1.55rem;
+    font-weight: 800;
     color: white;
+    letter-spacing: -0.25px;
+    margin: 0;
 }
 
 .creator {
     opacity: 0.75;
-    font-size: 0.85rem;
+    font-size: 1rem;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     white-space: nowrap;
-    line-height: 1; /* keep svg from adding height */
+    line-height: 1;
 }
 
 .type-badge {
-    font-size: 0.65rem;
-    padding: 3px 7px;
+    font-size: 1rem;
+    padding: 8px 8px;
     border-radius: 6px;
     background: rgba(100, 150, 255, 0.18);
     border: 1px solid rgba(100, 150, 255, 0.38);
     color: var(--color-accent2);
-    font-weight: 700;
+    font-weight: 800;
 }
 
-/* Tags (grid) */
-.tags {
-    margin-top: 6px;
+/* Tags */
+.tags,
+.tags-inline {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     flex-wrap: wrap;
+}
+
+.tags {
+    margin-top: 8px;
 }
 
 .tag {
     background: rgba(255, 255, 255, 0.1);
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 6px;
-    font-size: 0.75rem;
-    opacity: 0.85;
+    font-size: 0.85rem;
+    opacity: 0.9;
 }
 
+/* small tags now match the blue plugin badge style */
 .tag.small {
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    opacity: 0.7;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-surface);
+    color: var(--color-accent2);
+    font-weight: 800;
+    opacity: 0.8;
 }
 
 /* Description */
 .desc {
-    margin-top: 8px;
-    opacity: 0.9;
-    font-size: 0.9rem;
-    line-height: 1.3;
+    margin-top: 10px;
+    opacity: 0.92;
+    font-size: 1.25rem;
+    line-height: 1.45;
 }
 
-/* Stats base */
+/* Stats */
 .stats {
-    margin-top: 10px;
-    font-size: 0.78rem;
-    opacity: 0.8;
+    margin-top: 14px;
+    font-size: 0.95rem;
+    opacity: 0.85;
     display: flex;
-    gap: 6px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -274,21 +341,21 @@ defineEmits<{
 /* ---------------- LIST MODE ---------------- */
 .item-card.list {
     flex-direction: row;
-    height: 150px;
+    height: 180px;
+    padding-right: 90px;
 }
 
 .item-card.list .thumb-wrap {
-    width: 230px; /* older layout size */
+    width: 260px;
     height: 100%;
-    flex: 0 0 230px;
-    background: rgba(255, 255, 255, 0.04);
+    flex: 0 0 260px;
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .list-info {
-    justify-content: flex-start; /* top-align content */
+    justify-content: flex-start;
 }
 
-/* title row inline (older positioning) */
 .title-row {
     display: flex;
     align-items: center;
@@ -297,17 +364,45 @@ defineEmits<{
     line-height: 1.15;
 }
 
-/* tags inline in list title row */
-.tags-inline {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-/* keep stats at bottom-left */
 .list-stats {
     margin-top: auto;
     padding-top: 8px;
+}
+
+/* ---------------- Right-Side Actions ---------------- */
+.actions-right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: white;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.05s ease;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.action-btn:active {
+    transform: translateY(1px);
 }
 
 /* ---------------- GRID MODE ---------------- */
@@ -317,7 +412,7 @@ defineEmits<{
 
 .item-card.grid .thumb-wrap {
     width: 100%;
-    height: 170px;
+    height: 190px;
 }
 
 .top-line {
@@ -333,21 +428,42 @@ defineEmits<{
     overflow: hidden;
 }
 
-/* Mobile tweaks */
+/* ---------------- Mobile ---------------- */
 @media (max-width: 700px) {
     .item-card.list {
         flex-direction: column;
         height: auto;
+        padding-right: 0;
     }
 
     .item-card.list .thumb-wrap {
         width: 100%;
-        height: 170px;
+        height: 190px;
         flex: 0 0 auto;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    .list-stats {
-        margin-top: 10px;
+    .actions-right {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 10px 14px 0;
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .desc {
+        font-size: 0.95rem;
+    }
+
+    .stats {
+        font-size: 0.88rem;
     }
 }
 </style>

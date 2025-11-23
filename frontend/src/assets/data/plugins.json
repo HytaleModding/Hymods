@@ -7,7 +7,7 @@
     "updated": "2 days ago",
     "tags": ["Gameplay", "UI"],
     "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
-    "description": "A full quest and dialogue framework."
+    "description": "A complete quest-building and dialogue framework that allows creators to design everything from simple tasks to fully branching narrative arcs. Features support for dialogue trees, conditional triggers, quest states, cutscenes, scripted events, NPC interactions, and reward logic. Integrates cleanly with skill systems, factions, and world progression, enabling servers to build immersive RPG-style experiences with minimal scripting expertise."
   },
   {
     "type": "plugin",
@@ -17,7 +17,7 @@
     "updated": "1 week ago",
     "tags": ["Combat", "AI"],
     "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
-    "description": "Reworks combat, hit reactions, and enemies."
+    "description": "A complete rework of the combat system designed to make battles more tactical, responsive, and skill-based. Introduces timing attacks, hit reactions, stagger mechanics, directional blocking, parry windows, and momentum-based damage. Enemies gain improved AI, positioning awareness, and adaptive behavior profiles. Ideal for servers seeking deeper, more engaging combat with weight and flow comparable to modern action RPGs."
   },
   {
     "type": "plugin",
@@ -27,7 +27,7 @@
     "updated": "3 weeks ago",
     "tags": ["Graphics", "Performance"],
     "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
-    "description": "Dynamic lighting and shadow pipeline."
+    "description": "A dynamic voxel-based lighting engine featuring realtime shadows, emissive surfaces, light propagation, and environment-driven ambience. Completely replaces static baked lighting with a system that updates instantly as blocks are placed, destroyed, or moved. Includes performance-optimized GI simulation, custom shader hooks, and atmospheric rendering tweaks to enhance both realism and gameplay readability."
   },
   {
     "type": "plugin",
@@ -37,7 +37,7 @@
     "updated": "1 month ago",
     "tags": ["Server", "Utility"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
-    "description": "Moderation, backups, and admin helpers."
+    "description": "A centralized suite of moderation and administration tools for managing servers smoothly. Includes automated backups, real-time activity logs, player monitoring, anti-griefing features, region control helpers, ban/mute management, and server performance diagnostics. Streamlines server administration by replacing multiple smaller tools with one robust, integrated package."
   },
   {
     "type": "plugin",
@@ -47,7 +47,7 @@
     "updated": "4 days ago",
     "tags": ["Systems", "Server"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
-    "description": "Player economy, shops, and currency APIs."
+    "description": "A fully modular economic framework featuring currency accounts, NPC shops, player markets, trade logs, auction houses, taxes, and configurable money sinks. Supports inflation control, transaction audits, and integration hooks for crafting, loot, or faction systems. Ideal for servers building persistent worlds with deep economic gameplay or custom progression mechanics."
   },
   {
     "type": "plugin",
@@ -57,7 +57,7 @@
     "updated": "6 days ago",
     "tags": ["Gameplay", "Utilities"],
     "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
-    "description": "Advanced crafting stations and recipes."
+    "description": "A complete enhancement of the crafting system introducing workstation-based crafting, animated crafting sequences, ingredient quality tiers, blueprints, research mechanics, and upgradeable stations. Expands recipes with multi-step crafting processes, unlockable schematics, and context-sensitive interactions that allow creators to build complex crafting progression systems."
   },
   {
     "type": "plugin",
@@ -67,7 +67,7 @@
     "updated": "2 weeks ago",
     "tags": ["AI", "Gameplay"],
     "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
-    "description": "Friendly NPC companion behaviors."
+    "description": "Adds intelligent AI companion NPCs that can follow, assist, and fight alongside players. Features personality traits, loyalty levels, customizable equipment, stat progression, gathering behaviors, and emotional responses. Companions learn from player habits and environmental cues, making them feel dynamic and alive."
   },
   {
     "type": "plugin",
@@ -77,7 +77,7 @@
     "updated": "1 week ago",
     "tags": ["Worldgen", "Gameplay"],
     "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
-    "description": "Procedural dungeons with loot tables."
+    "description": "A procedural dungeon generator that creates themed multi-layer structures complete with traps, puzzles, branching paths, hidden rooms, elite enemies, and customizable loot tables. Supports biome-specific dungeon variants, rare mega-dungeons, and chained dungeon networks for long-form exploration content."
   },
   {
     "type": "plugin",
@@ -87,7 +87,7 @@
     "updated": "3 days ago",
     "tags": ["UI", "Utility"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
-    "description": "Player pins and shared map markers."
+    "description": "Adds a flexible marker and waypoint system to the world map. Players can drop pins, organize markers by category, share routes with party members, and set navigational guides. Includes fully customizable icons and collaborative map features perfect for exploration, survival, and group coordination."
   },
   {
     "type": "plugin",
@@ -97,7 +97,7 @@
     "updated": "2 months ago",
     "tags": ["Systems", "Environment"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
-    "description": "Server-side seasonal weather presets."
+    "description": "A server-side seasonal and weather management suite offering full control over climate patterns, storm cycles, temperature variations, biome weather rules, and timed seasonal transitions. Supports custom events like sandstorms, heavy fog, magical weather, and gameplay-affecting phenomena such as reduced visibility or slowed movement."
   },
   {
     "type": "plugin",
@@ -107,7 +107,7 @@
     "updated": "5 days ago",
     "tags": ["Social", "Server"],
     "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
-    "description": "Groups, invites, shared XP."
+    "description": "A full-featured party system allowing players to create groups with shared XP, loot rules, private chat, map markers, health indicators, and quick-invite features. Designed for co-op playstyles and MMO-like environments where teamwork and group coordination matter."
   },
   {
     "type": "plugin",
@@ -117,7 +117,7 @@
     "updated": "1 month ago",
     "tags": ["UI", "Moderation"],
     "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
-    "description": "Filters, channels, and formatting."
+    "description": "A comprehensive chat overhaul introducing channel separation, private messaging, anti-spam systems, filters, formatting tools, emotes, color-coded roles, and administrative chat controls. Enables servers to maintain clean communication while giving players expressive chat tools."
   },
   {
     "type": "plugin",
@@ -127,7 +127,7 @@
     "updated": "1 week ago",
     "tags": ["RPG", "Gameplay"],
     "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
-    "description": "Per-class progression and perks."
+    "description": "An RPG progression framework featuring class trees, ability unlocks, passive bonuses, specializations, and perk paths. Includes integration hooks for combat, crafting, exploration, magic, and custom gameplay systems. Players advance through a highly customizable skill web tailored to the server's vision."
   },
   {
     "type": "plugin",
@@ -137,7 +137,7 @@
     "updated": "3 weeks ago",
     "tags": ["Server", "Protection"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
-    "description": "Region protection and permissions."
+    "description": "A region-claiming and housing protection toolkit enabling players to secure plots, set permissions, rent spaces, and manage trusted members. Offers robust anti-griefing tools, block logs, boundary visualization, and server-side protection rules ideal for towny-style gameplay."
   },
   {
     "type": "plugin",
@@ -147,7 +147,7 @@
     "updated": "2 weeks ago",
     "tags": ["Combat", "RPG"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
-    "description": "Create modular bosses with phases."
+    "description": "A modular framework for creating cinematic boss encounters with multi-phase behavior, telegraphed attacks, battlefield events, minion spawns, environmental hazards, music cues, and scripted transitions. Lets creators design epic, memorable battles without deep coding knowledge."
   },
   {
     "type": "plugin",
@@ -157,7 +157,7 @@
     "updated": "6 days ago",
     "tags": ["UI", "Utility"],
     "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
-    "description": "Sort, stack, and search items."
+    "description": "A series of quality-of-life improvements adding sorting, auto-stacking, search bars, quick-transfer hotkeys, and smart categorization. Seamlessly supports custom items and modded inventories, making item management smoother and less tedious."
   },
   {
     "type": "plugin",
@@ -167,7 +167,7 @@
     "updated": "1 month ago",
     "tags": ["Social", "Animation"],
     "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
-    "description": "Custom emotes for servers."
+    "description": "Provides a universal API for creating, syncing, and customizing player emotes. Supports animated poses, sound effects, unlockable emote packs, cosmetic triggers, and visibility rules. Perfect for social hubs, roleplay servers, or cosmetic progression systems."
   },
   {
     "type": "plugin",
@@ -177,7 +177,7 @@
     "updated": "2 months ago",
     "tags": ["Gameplay", "Movement"],
     "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
-    "description": "Rideable creatures and saddles."
+    "description": "A full riding and mount progression system introducing taming, breeding, saddle gear, mount stats, terrain affinities, speed scaling, stamina bars, and special abilities. Includes stable management and AI pathing, allowing players to raise and personalize their mounts."
   },
   {
     "type": "plugin",
@@ -187,7 +187,7 @@
     "updated": "3 days ago",
     "tags": ["UI", "Tools"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
-    "description": "Freecam and snapshot controls."
+    "description": "A cinematic camera and screenshot suite offering free-cam movement, depth-of-field control, exposure adjustments, color grading filters, slow-motion, motion paths, and custom overlays. Ideal for creators capturing cinematic moments, builds, or server events."
   },
   {
     "type": "plugin",
@@ -197,7 +197,7 @@
     "updated": "5 weeks ago",
     "tags": ["Audio", "Environment"],
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
-    "description": "Ambient tracks by biome/zone."
+    "description": "Creates dynamic music layering and ambience tied to biomes, interiors, combat states, time of day, or custom triggers. Supports playlists, crossfades, audio blending, and modded soundbanks—perfect for immersive RPG worlds."
   },
   {
     "type": "plugin",
@@ -207,7 +207,7 @@
     "updated": "2 weeks ago",
     "tags": ["Minigame", "Server"],
     "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
-    "description": "Time trials and leaderboards."
+    "description": "A precision timing system for parkour and speedrun maps featuring leaderboards, checkpoints, ghost runs, course difficulty ratings, and record tracking. Great for minigame hubs and competitive players."
   },
   {
     "type": "plugin",
@@ -217,6 +217,6 @@
     "updated": "3 months ago",
     "tags": ["Systems", "Economy"],
     "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
-    "description": "NPC caravans and dynamic prices."
+    "description": "Simulates dynamic trade systems with traveling NPC caravans, fluctuating prices, resource scarcity, import/export mechanics, regional inventories, and player-driven economic impacts. Creates a world that feels alive through evolving trade networks."
   }
 ]
