@@ -1,0 +1,222 @@
+[
+  {
+    "type": "plugin",
+    "title": "Quest Engine",
+    "author": "SparkDev",
+    "downloads": 123456,
+    "updated": "2 days ago",
+    "tags": ["Gameplay", "UI"],
+    "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
+    "description": "A full quest and dialogue framework."
+  },
+  {
+    "type": "plugin",
+    "title": "Combat Overhaul",
+    "author": "Blocksmith",
+    "downloads": 98412,
+    "updated": "1 week ago",
+    "tags": ["Combat", "AI"],
+    "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
+    "description": "Reworks combat, hit reactions, and enemies."
+  },
+  {
+    "type": "plugin",
+    "title": "Voxel Lighting",
+    "author": "LumenLabs",
+    "downloads": 52110,
+    "updated": "3 weeks ago",
+    "tags": ["Graphics", "Performance"],
+    "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
+    "description": "Dynamic lighting and shadow pipeline."
+  },
+  {
+    "type": "plugin",
+    "title": "Server Tools+",
+    "author": "Adminify",
+    "downloads": 40722,
+    "updated": "1 month ago",
+    "tags": ["Server", "Utility"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
+    "description": "Moderation, backups, and admin helpers."
+  },
+  {
+    "type": "plugin",
+    "title": "Economy Core",
+    "author": "CoinForge",
+    "downloads": 88501,
+    "updated": "4 days ago",
+    "tags": ["Systems", "Server"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
+    "description": "Player economy, shops, and currency APIs."
+  },
+  {
+    "type": "plugin",
+    "title": "Crafting Plus",
+    "author": "TabletopDev",
+    "downloads": 26490,
+    "updated": "6 days ago",
+    "tags": ["Gameplay", "Utilities"],
+    "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
+    "description": "Advanced crafting stations and recipes."
+  },
+  {
+    "type": "plugin",
+    "title": "AI Companions",
+    "author": "PathMind",
+    "downloads": 73012,
+    "updated": "2 weeks ago",
+    "tags": ["AI", "Gameplay"],
+    "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
+    "description": "Friendly NPC companion behaviors."
+  },
+  {
+    "type": "plugin",
+    "title": "Dungeon Spawner",
+    "author": "Stoneworks",
+    "downloads": 36044,
+    "updated": "1 week ago",
+    "tags": ["Worldgen", "Gameplay"],
+    "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
+    "description": "Procedural dungeons with loot tables."
+  },
+  {
+    "type": "plugin",
+    "title": "Map Markers",
+    "author": "CartoLab",
+    "downloads": 19850,
+    "updated": "3 days ago",
+    "tags": ["UI", "Utility"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
+    "description": "Player pins and shared map markers."
+  },
+  {
+    "type": "plugin",
+    "title": "Weather Control",
+    "author": "SkySmith",
+    "downloads": 54188,
+    "updated": "2 months ago",
+    "tags": ["Systems", "Environment"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
+    "description": "Server-side seasonal weather presets."
+  },
+  {
+    "type": "plugin",
+    "title": "Party System",
+    "author": "GuildCraft",
+    "downloads": 67005,
+    "updated": "5 days ago",
+    "tags": ["Social", "Server"],
+    "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
+    "description": "Groups, invites, shared XP."
+  },
+  {
+    "type": "plugin",
+    "title": "Chat Enhancer",
+    "author": "TextWarden",
+    "downloads": 41522,
+    "updated": "1 month ago",
+    "tags": ["UI", "Moderation"],
+    "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
+    "description": "Filters, channels, and formatting."
+  },
+  {
+    "type": "plugin",
+    "title": "Skill Trees",
+    "author": "LevelUpLabs",
+    "downloads": 90514,
+    "updated": "1 week ago",
+    "tags": ["RPG", "Gameplay"],
+    "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
+    "description": "Per-class progression and perks."
+  },
+  {
+    "type": "plugin",
+    "title": "Housing Claims",
+    "author": "LandLock",
+    "downloads": 38902,
+    "updated": "3 weeks ago",
+    "tags": ["Server", "Protection"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
+    "description": "Region protection and permissions."
+  },
+  {
+    "type": "plugin",
+    "title": "Boss Framework",
+    "author": "RaidForge",
+    "downloads": 77110,
+    "updated": "2 weeks ago",
+    "tags": ["Combat", "RPG"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
+    "description": "Create modular bosses with phases."
+  },
+  {
+    "type": "plugin",
+    "title": "Inventory Tweaks",
+    "author": "QuickSlot",
+    "downloads": 48219,
+    "updated": "6 days ago",
+    "tags": ["UI", "Utility"],
+    "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
+    "description": "Sort, stack, and search items."
+  },
+  {
+    "type": "plugin",
+    "title": "Emote Pack API",
+    "author": "AnimPulse",
+    "downloads": 24509,
+    "updated": "1 month ago",
+    "tags": ["Social", "Animation"],
+    "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
+    "description": "Custom emotes for servers."
+  },
+  {
+    "type": "plugin",
+    "title": "Mount System",
+    "author": "RiderDev",
+    "downloads": 33440,
+    "updated": "2 months ago",
+    "tags": ["Gameplay", "Movement"],
+    "thumbnail": "https://cdn.dbolical.com/videos/games/1/70/69225/hytale-announcement-trailer.mp4.jpg",
+    "description": "Rideable creatures and saddles."
+  },
+  {
+    "type": "plugin",
+    "title": "Photo Mode",
+    "author": "LensLab",
+    "downloads": 11904,
+    "updated": "3 days ago",
+    "tags": ["UI", "Tools"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhdudrazqsOkPoa2dSsdrlq4j6Y0Y0QPP6xA_yUEinbCe4PHXJFvJ47JdHpqZTChxvaFQ&usqp=CAU",
+    "description": "Freecam and snapshot controls."
+  },
+  {
+    "type": "plugin",
+    "title": "Music Regions",
+    "author": "Soundscape",
+    "downloads": 27488,
+    "updated": "5 weeks ago",
+    "tags": ["Audio", "Environment"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMfAZPZ15GGuDZF17uT-cbnHI0AXQ_Yzd3N7hz_gaP0AnfZHpkLhRHz4brkzOhdKnYyc&usqp=CAU",
+    "description": "Ambient tracks by biome/zone."
+  },
+  {
+    "type": "plugin",
+    "title": "Parkour Timer",
+    "author": "RunRush",
+    "downloads": 16322,
+    "updated": "2 weeks ago",
+    "tags": ["Minigame", "Server"],
+    "thumbnail": "https://static0.thegamerimages.com/wordpress/wp-content/uploads/2025/11/hytale-gameplay-raw-footage.jpg",
+    "description": "Time trials and leaderboards."
+  },
+  {
+    "type": "plugin",
+    "title": "Trade Routes",
+    "author": "MerchantAI",
+    "downloads": 44990,
+    "updated": "3 months ago",
+    "tags": ["Systems", "Economy"],
+    "thumbnail": "https://static0.dualshockersimages.com/wordpress/wp-content/uploads/2019/01/20.jpg?w=1600&h=900&fit=crop",
+    "description": "NPC caravans and dynamic prices."
+  }
+]
