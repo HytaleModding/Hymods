@@ -33,31 +33,26 @@ import Footer from "../components/Footer.vue";
     color: white;
 }
 
-/* Main wrapper for spacing — adaptive padding */
 .content {
     flex: 1;
     padding: clamp(16px, 4vw, 40px);
 }
 
-/* Core content container (the card) */
+/* container is now just a width wrapper, NOT a card */
 .container {
     width: 100%;
-    max-width: clamp(700px, 80vw, 1100px); /* responsive max-width */
+    max-width: clamp(700px, 80vw, 1100px);
     margin: 0 auto;
-    background: var(--color-surface);
-    border-radius: 14px;
-    padding: clamp(18px, 3vw, 32px); /* responsive padding */
-    border: 1px solid rgba(255, 255, 255, 0.06);
 
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
 }
 
-/* Small screens refinement */
 @media (max-width: 640px) {
-    .container {
-        border-radius: 10px;
+    .content {
         padding: clamp(12px, 4vw, 20px);
     }
 }
