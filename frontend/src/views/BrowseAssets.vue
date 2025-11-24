@@ -4,7 +4,7 @@
         <header class="browse-header">
             <div class="header-row">
                 <div>
-                    <h2>Browse Assets</h2>
+                    <h2>Hytale Assets</h2>
                     <p class="sub">
                         Models, textures, prefabs, VFX, and packs.
                     </p>
