@@ -4,7 +4,7 @@
         <div class="nav-inner">
             <!-- Left: Logo (Home button) -->
             <router-link to="/" class="brand" aria-label="Go to home">
-                <h1 class="logo">HyMods</h1>
+                <h1 class="logo">hytl.shop</h1>
             </router-link>
 
             <!-- Center cluster: Tabs + Search -->
@@ -144,7 +144,7 @@ function goSearch() {
 }
 
 .nav-inner {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 12px 18px;
     display: flex;

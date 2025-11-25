@@ -1,19 +1,17 @@
 <!-- src/components/HeaderFilterBar.vue -->
 <template>
     <div class="filters-cluster">
-        <!-- expanded tag search with chips + suggestions -->
-        <div class="tag-search" @click="focusTagInput">
+        <!-- TAG SEARCH WITH CHIPS + SUGGESTIONS -->
+        <div ref="tagSearchEl" class="tag-search" @click="focusTagInput">
             <!-- active tag chips -->
-            <span v-for="t in tags" :key="t" class="tag-chip">
-                {{ t }}
-                <button
-                    class="chip-x"
-                    @click.stop="removeTag(t)"
-                    aria-label="Remove tag"
-                >
-                    ✕
-                </button>
-            </span>
+            <Tag
+                v-for="t in tags"
+                :key="t"
+                :label="t"
+                size="lg"
+                removable
+                @remove="removeTag(t)"
+            />
 
             <!-- input lives inline after chips -->
             <input
@@ -30,69 +28,98 @@
                 @keydown.esc.prevent="closeSuggestions()"
             />
 
-            <!-- suggestions dropdown -->
-            <ul v-if="showSuggestions" class="suggestions" role="listbox">
-                <li
+            <!-- CLEAR BUTTON -->
+            <button
+                v-if="tagQuery.trim().length || tags.length"
+                class="clear-btn"
+                type="button"
+                aria-label="Clear tags and query"
+                @click.stop="clearAll"
+            >
+                Clear
+            </button>
+
+            <!-- suggestions dropdown: LEFT-TO-RIGHT CHIP LIST -->
+            <div v-if="showSuggestions" class="suggestions" role="listbox">
+                <Tag
                     v-for="(s, i) in filteredSuggestions"
                     :key="s"
-                    class="suggestion"
+                    class="suggestion-chip"
                     :class="{ active: i === activeIndex }"
                     role="option"
+                    size="lg"
+                    clickable
                     @mousedown.prevent="addTag(s)"
                     @mousemove="activeIndex = i"
-                >
-                    {{ s }}
-                </li>
+                    @click="addTag(s)"
+                    :label="s"
+                />
 
-                <li
+                <div
                     v-if="!filteredSuggestions.length"
-                    class="suggestion empty"
+                    class="suggestion-empty"
                     aria-disabled="true"
                 >
                     No matches
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
 
-        <!-- Filter button -->
-        <button
-            class="filter-btn"
-            @click="$emit('openFilters')"
-            aria-label="Open filters"
-        >
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <path
-                    fill="currentColor"
-                    d="M3 5h18v2H3V5zm4 6h10v2H7v-2zm3 6h4v2h-4v-2z"
-                />
-            </svg>
-            Filters
-            <span v-if="activeCount" class="filter-pill">
-                {{ activeCount }}
-            </span>
-        </button>
+        <!-- SORT DROPDOWN (replaces Filter button) -->
+        <div class="sort-wrap">
+            <label class="sort-label" for="sort-select">Sort by</label>
+            <select
+                id="sort-select"
+                class="sort-select"
+                v-model="localSort"
+                @change="onSortChange"
+            >
+                <option value="downloads">Most downloads</option>
+                <option value="updated">Recently updated</option>
+                <option value="title">Title (A–Z)</option>
+            </select>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
+import {
+    computed,
+    nextTick,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    watch,
+} from "vue";
+import Tag from "./Tag.vue";
 
 const props = defineProps<{
     tags: string[];
     allTags: string[];
-    activeCount: number;
+    sort: "downloads" | "updated" | "title";
 }>();
 
 const emit = defineEmits<{
     (e: "update:tags", v: string[]): void;
-    (e: "openFilters"): void;
+    (e: "update:sort", v: "downloads" | "updated" | "title"): void;
 }>();
 
-/* local UI state */
+/* ---- SORT LOCAL STATE ---- */
+const localSort = ref(props.sort);
+
+watch(
+    () => props.sort,
+    (v) => {
+        if (v !== localSort.value) localSort.value = v;
+    },
+);
+
+/* ---- TAG SEARCH LOCAL STATE ---- */
 const tagQuery = ref("");
 const isTagFocus = ref(false);
 const activeIndex = ref(0);
 const tagInputEl = ref<HTMLInputElement | null>(null);
+const tagSearchEl = ref<HTMLElement | null>(null);
 
 const filteredSuggestions = computed(() => {
     const q = tagQuery.value.trim().toLowerCase();
@@ -115,13 +142,14 @@ const showSuggestions = computed(() => {
     );
 });
 
+/* ---- TAG HANDLERS ---- */
 function focusTagInput() {
     nextTick(() => tagInputEl.value?.focus());
 }
 
 function onTagBlur() {
-    // delay so click on suggestion still lands
     setTimeout(() => {
+        if (tagSearchEl.value?.contains(document.activeElement)) return;
         isTagFocus.value = false;
         activeIndex.value = 0;
         tagQuery.value = "";
@@ -149,6 +177,13 @@ function removeTag(t: string) {
     focusTagInput();
 }
 
+function clearAll() {
+    emit("update:tags", []);
+    tagQuery.value = "";
+    activeIndex.value = 0;
+    focusTagInput();
+}
+
 function moveActive(dir: 1 | -1) {
     const n = filteredSuggestions.value.length;
     if (!n) return;
@@ -158,7 +193,33 @@ function moveActive(dir: 1 | -1) {
 function commitActive() {
     const list = filteredSuggestions.value;
     if (!list.length) return;
-    addTag(list[activeIndex.value] ?? list[0]);
+
+    const choice = list[activeIndex.value] ?? list[0];
+    if (!choice) return;
+    addTag(choice);
+}
+
+/* ---- OUTSIDE CLICK TO CLOSE SUGGESTIONS ---- */
+function onDocPointerDown(e: PointerEvent) {
+    const root = tagSearchEl.value;
+    if (!root) return;
+
+    if (!root.contains(e.target as Node)) {
+        closeSuggestions();
+    }
+}
+
+onMounted(() => {
+    document.addEventListener("pointerdown", onDocPointerDown);
+});
+
+onBeforeUnmount(() => {
+    document.removeEventListener("pointerdown", onDocPointerDown);
+});
+
+/* ---- SORT HANDLER ---- */
+function onSortChange() {
+    emit("update:sort", localSort.value);
 }
 </script>
 
@@ -183,40 +244,16 @@ function commitActive() {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: text;
-    max-width: 360px;
-}
 
-.tag-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    background: rgba(100, 150, 255, 0.18);
-    border: 1px solid rgba(100, 150, 255, 0.5);
-    color: white;
-    white-space: nowrap;
-}
-
-.chip-x {
-    background: transparent;
-    border: none;
-    color: white;
-    opacity: 0.8;
-    cursor: pointer;
-    font-size: 0.8rem;
-    line-height: 1;
-    padding: 0;
-}
-.chip-x:hover {
-    opacity: 1;
+    width: 500px;
+    max-width: 500px;
+    box-sizing: border-box;
+    min-width: 0;
 }
 
 .tag-search input {
-    flex: 1 1 120px;
-    min-width: 120px;
+    flex: 1 1 140px;
+    min-width: 140px;
     height: 24px;
     background: transparent;
     border: none;
@@ -228,74 +265,105 @@ function commitActive() {
     opacity: 0.6;
 }
 
+/* Clear button styled like tag */
+.clear-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: auto;
+    height: auto;
+
+    padding: 4px 10px;
+    border-radius: 999px;
+
+    background: rgba(100, 150, 255, 0.18);
+    border: 1px solid rgba(100, 150, 255, 0.35);
+    color: white;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+
+    cursor: pointer;
+    opacity: 0.9;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        opacity 0.15s ease,
+        transform 0.05s ease;
+}
+.clear-btn:hover {
+    background: rgba(140, 180, 255, 0.28);
+    border-color: rgba(140, 180, 255, 0.55);
+    opacity: 1;
+}
+.clear-btn:active {
+    transform: translateY(1px);
+}
+
+/* suggestions: horizontal chip grid */
 .suggestions {
     position: absolute;
     top: calc(100% + 6px);
     left: 0;
     right: 0;
     z-index: 20;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
     margin: 0;
-    padding: 6px;
-    list-style: none;
-    background: rgba(20, 20, 25, 0.98);
+    padding: 12px;
+
+    background: var(--color-surface);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-    max-height: 220px;
-    overflow: auto;
+    border-radius: 12px;
+
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    max-height: none;
+    overflow: visible;
 }
 
-.suggestion {
-    padding: 6px 8px;
-    border-radius: 7px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: white;
-    opacity: 0.9;
-}
-.suggestion:hover,
-.suggestion.active {
-    background: rgba(255, 255, 255, 0.08);
+.suggestion-chip.active :deep(.tag),
+.suggestion-chip.active {
+    background: rgba(100, 150, 255, 0.22);
     opacity: 1;
 }
-.suggestion.empty {
-    cursor: default;
-    opacity: 0.6;
-}
-/* ---- END TAG MULTI-SEARCH ---- */
 
-.filter-btn {
+.suggestion-empty {
+    padding: 6px 8px;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+/* ---- SORT DROPDOWN ---- */
+.sort-wrap {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+}
+
+.sort-label {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.sort-select {
     height: 34px;
-    padding: 0 12px;
+    padding: 4px 10px;
     border-radius: 9px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--color-accent2);
-    font-weight: 700;
+    color: white;
     font-size: 0.9rem;
     cursor: pointer;
-    transition:
-        background 0.15s ease,
-        transform 0.05s ease;
-}
-.filter-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-.filter-btn:active {
-    transform: translateY(1px);
-}
-
-.filter-pill {
-    margin-left: 4px;
-    font-size: 0.72rem;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 999px;
-    background: rgba(100, 150, 255, 0.18);
-    border: 1px solid rgba(100, 150, 255, 0.5);
-    color: white;
 }
 </style>

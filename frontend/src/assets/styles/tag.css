@@ -1,0 +1,51 @@
+/* src/assets/styles/tags.css (import once globally) */
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+
+    background: rgba(100, 150, 255, 0.18);
+    border: 1px solid rgba(100, 150, 255, 0.5);
+    color: white;
+}
+
+/* size variants */
+.tag--sm {
+    font-size: 0.75rem;
+    padding: 2px 7px;
+}
+.tag--md {
+    font-size: 0.8rem;
+}
+.tag--lg {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+}
+
+/* interactive variants */
+.tag--clickable {
+    cursor: pointer;
+}
+.tag--clickable:hover {
+    background: rgba(100, 150, 255, 0.28);
+}
+
+.tag__x {
+    background: transparent;
+    border: none;
+    color: inherit;
+    opacity: 0.8;
+    cursor: pointer;
+    font-size: 0.8em;
+    line-height: 1;
+    padding: 0;
+}
+.tag__x:hover {
+    opacity: 1;
+}

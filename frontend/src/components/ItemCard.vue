@@ -22,15 +22,16 @@
                     {{ author }}
                 </span>
 
-                <div class="tags-inline" v-if="tagObjects.length">
-                    <span
-                        v-for="tag in tagObjects"
-                        :key="tag.label"
-                        class="tag small"
-                    >
-                        <component :is="tag.icon" class="tag-icon" />
-                        {{ tag.label }}
-                    </span>
+                <!-- UPDATED: clickable Tag component + emits tag-click -->
+                <div class="tags-inline" v-if="tags?.length">
+                    <Tag
+                        v-for="t in tags"
+                        :key="t"
+                        :label="t"
+                        size="lg"
+                        clickable
+                        @click.stop="onTagClick(t)"
+                    />
                 </div>
             </div>
 
@@ -89,10 +90,16 @@
 
             <span class="creator">by {{ author }}</span>
 
+            <!-- UPDATED GRID TAGS: clickable + emits tag-click -->
             <div class="tags" v-if="tags?.length">
-                <span v-for="tag in tags" :key="tag" class="tag">
-                    {{ tag }}
-                </span>
+                <Tag
+                    v-for="t in tags"
+                    :key="t"
+                    :label="t"
+                    size="lg"
+                    clickable
+                    @click.stop="onTagClick(t)"
+                />
             </div>
 
             <p v-if="description" class="desc grid-desc">
@@ -116,9 +123,8 @@ import {
     User as UserIcon,
     Heart as HeartIcon,
     Star as StarIcon,
-    Tag as TagIcon,
 } from "lucide-vue-next";
-import { TAGS } from "../assets/data/tags";
+import Tag from "./Tag.vue";
 
 const props = withDefaults(
     defineProps<{
@@ -137,17 +143,18 @@ const props = withDefaults(
     },
 );
 
-const tagObjects = computed(() => {
-    return (props.tags ?? []).map((t) => TAGS[t] ?? null).filter(Boolean);
-});
-
-defineEmits<{
+const emit = defineEmits<{
     (e: "open"): void;
     (e: "toggle-like"): void;
     (e: "toggle-favorite"): void;
+    (e: "tag-click", tag: string): void;
 }>();
 
-// limit description to 256 chars in list view
+function onTagClick(tag: string) {
+    emit("tag-click", tag);
+}
+
+// limit description to 128 chars in list view
 const truncatedDesc = computed(() => {
     const d = props.description ?? "";
     if (props.display_mode !== "list") return d;
@@ -158,32 +165,43 @@ const truncatedDesc = computed(() => {
 <style scoped>
 /* ---------------- Shared card base ---------------- */
 .item-card {
-    background: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 18px;
+    /* base intensity for cards */
+    --surface-strength: 0.7;
+
+    background: var(--surface-gradient);
+    border: 2px solid var(--surface-border);
+    border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
     display: flex;
     position: relative;
 
-    box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(64px);
+    box-shadow: var(--surface-shadow);
 
     transition:
         transform 0.12s ease,
         border-color 0.12s ease,
-        box-shadow 0.12s ease;
+        box-shadow 0.12s ease,
+        background 0.15s ease;
 
     min-height: 170px;
 }
 
 .item-card:hover {
+    /* slightly stronger lighting on hover */
+    --surface-strength: 1;
+
     transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.16);
+
+    /* keep the same gradient family so heart/star area stays consistent */
+    background: var(--surface-gradient);
+
+    border-color: rgba(255, 255, 255, 0.14);
+
     box-shadow:
-        0 16px 38px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        0 16px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* ---------------- Thumbnail ---------------- */
@@ -273,7 +291,7 @@ const truncatedDesc = computed(() => {
     font-weight: 800;
 }
 
-/* Tags */
+/* Tags containers (keep) */
 .tags,
 .tags-inline {
     display: flex;
@@ -283,31 +301,6 @@ const truncatedDesc = computed(() => {
 
 .tags {
     margin-top: 8px;
-}
-
-.tag {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    opacity: 0.9;
-}
-
-/* small tags now match the blue plugin badge style */
-.tag.small {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-
-    font-size: 0.9rem;
-    padding: 4px 8px;
-    border-radius: 6px;
-
-    background: var(--color-surface);
-    border: 1px solid var(--color-surface);
-    color: var(--color-accent2);
-    font-weight: 800;
-    opacity: 0.8;
 }
 
 /* Description */

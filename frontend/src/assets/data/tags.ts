@@ -72,6 +72,46 @@ export const TAGS = {
   Server: { label: "Server", icon: Server },
   Worldgen: { label: "Worldgen", icon: Mountain },
   Utilities: { label: "Utilities", icon: Wrench },
-} as any;
+} as const;
 
+// tag key type (union of all keys in TAGS)
 export type TagKey = keyof typeof TAGS;
+
+// common shape for a tag
+export type TagInfo = {
+  label: string;
+  icon: any | null;
+};
+
+// provides a safe fallback so UI never breaks
+const DEFAULT_TAG: TagInfo = {
+  label: "Tag",
+  icon: null,
+};
+
+/**
+ * Get full tag info (label + icon). Falls back to {label, null} if missing.
+ */
+export function getTagInfo(tag: string): TagInfo {
+  const key = tag as TagKey;
+  const info = (TAGS as Record<string, TagInfo>)[key];
+  if (info) return info;
+
+  // if tag isn't registered yet, still show its text
+  return { ...DEFAULT_TAG, label: tag, icon: null };
+}
+
+/**
+ * Get only the icon component (or null if missing).
+ */
+export function getTagIcon(tag: string): any | null {
+  return getTagInfo(tag).icon;
+}
+
+/**
+ * Get a sorted list of all known tag labels.
+ * Useful for suggestions/autocomplete.
+ */
+export function getAllTagLabels(): string[] {
+  return Object.keys(TAGS).sort();
+}
