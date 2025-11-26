@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Global Stylesheet (index.css)
+   --------------------------------------------------------------------------
+   This file defines global resets, base typography, neutral element defaults,
+   and imports the project-wide design tokens. No component-specific styling
+   belongs here.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Design Tokens
+   Imported first so all global styles have access to shared variables.
+   -------------------------------------------------------------------------- */
+@import "./fonts.css"; /* @font-face declarations + typography scale */
+@import "./colours.css"; /* semantic + palette colors */
+@import "./spacing.css"; /* spacing, padding, margin scale */
+@import "./gradients.css"; /* gradient tokens */
+
+/* ==========================================================================
+   Global Reset
+   --------------------------------------------------------------------------
+   Normalizes default styling across browsers.
+   - Removes margin/padding
+   - Enforces border-box sizing
+   - Applies reset to pseudo-elements as well
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================================================
+   Page Defaults
+   --------------------------------------------------------------------------
+   Sets base layout, background, typography color, and smoothing.
+   These values form the global environment for the entire Vue application.
+   ========================================================================== */
+html {
+    height: 100%;
+    background: var(--ui-bg-deep);
+    color: var(--ui-text);
+}
+
+body {
+    min-height: 100%;
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+
+    /* Improves text rendering on WebKit-based browsers */
+    -webkit-font-smoothing: antialiased;
+}
+
+#app {
+    min-height: 100%;
+}
+
+/* ==========================================================================
+   Typography + Links
+   --------------------------------------------------------------------------
+   Keeps anchors clean and enables accessible focus/hover states.
+   Does not override base color, allowing tokens to define palette rules.
+   ========================================================================== */
+a:hover,
+a:focus-visible {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Button Baseline
+   --------------------------------------------------------------------------
+   Provides a neutral button element with:
+   - inherited font + color
+   - no browser default background or border
+   - consistent cursor behavior
+   Strong visual styling should be applied in components or utilities.
+   ========================================================================== */
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

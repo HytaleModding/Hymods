@@ -1,0 +1,71 @@
+:root {
+    /* ==========================================================================
+       Gradient System Tokens
+       --------------------------------------------------------------------------
+       Uses the core colour palette (from colours.css) via RGB triplets so that
+       gradients can scale alpha with `--surface-strength`.
+       ========================================================================== */
+
+    /* RGB triplets derived from core palette:
+       These mirror the hex values defined in colours.css. */
+    --color-accent-rgb: 234, 193, 90; /* #eac15a  / var(--color-accent)  */
+    --color-accent2-rgb: 92, 139, 224; /* #5c8be0  / var(--color-accent2) */
+    --color-accent3-rgb: 62, 107, 201; /* #3e6bc9  / var(--color-accent3) */
+    --color-bg-rgb: 26, 31, 46; /* #1a1f2e  / var(--color-bg)      */
+
+    /* Controls overall gradient intensity via alpha scaling.
+       0 = off, 1 = default, 2 = strong. */
+    --surface-strength: 1;
+
+    /* ----------------------------------------------------------------------
+       Surface Background
+       Multi-layer gradient used for elevated surfaces and cards.
+       ---------------------------------------------------------------------- */
+    --surface-gradient:
+        /* Layer 1: gold/blue glossy highlight */
+        linear-gradient(
+            to bottom right,
+            rgba(var(--color-accent-rgb), calc(0.1 * var(--surface-strength)))
+                0%,
+            rgba(var(--color-accent-rgb), calc(0.04 * var(--surface-strength)))
+                30%,
+            rgba(var(--color-accent2-rgb), calc(0.03 * var(--surface-strength)))
+                60%,
+            rgba(var(--color-bg-rgb), calc(0.9 * var(--surface-strength))) 100%
+        ),
+        /* Layer 2: ambient radial glow */
+            radial-gradient(
+                900px at 20% 25%,
+                rgba(
+                        var(--color-accent2-rgb),
+                        calc(0.12 * var(--surface-strength))
+                    )
+                    0%,
+                rgba(
+                        var(--color-accent3-rgb),
+                        calc(0.06 * var(--surface-strength))
+                    )
+                    40%,
+                rgba(0, 0, 0, calc(0.15 * var(--surface-strength))) 100%
+            ),
+        /* Layer 3: deep base shading */
+            linear-gradient(
+                to bottom,
+                rgba(var(--color-bg-rgb), calc(0.85 * var(--surface-strength))),
+                rgba(var(--color-bg-rgb), calc(1 * var(--surface-strength)))
+            );
+
+    /* Hover variant: simplified, brighter accent mix. */
+    --surface-gradient-hover: linear-gradient(
+        to bottom right,
+        rgba(var(--color-accent-rgb), calc(0.18 * var(--surface-strength))),
+        rgba(var(--color-accent2-rgb), calc(0.1 * var(--surface-strength)))
+    );
+
+    /* Subtle border for elevated surfaces (aligned with UI border tone). */
+    --surface-border: rgba(255, 255, 255, 0.1);
+
+    /* Depth shadow: outer drop shadow + soft inner highlight. */
+    --surface-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}

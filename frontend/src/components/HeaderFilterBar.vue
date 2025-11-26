@@ -65,19 +65,33 @@
             </div>
         </div>
 
-        <!-- SORT DROPDOWN (replaces Filter button) -->
-        <div class="sort-wrap">
-            <label class="sort-label" for="sort-select">Sort by</label>
-            <select
-                id="sort-select"
-                class="sort-select"
-                v-model="localSort"
-                @change="onSortChange"
+        <!-- SORT DROPDOWN (fully custom, matches tags dropdown) -->
+        <div ref="sortRootEl" class="sort-wrap">
+            <button
+                type="button"
+                class="sort-trigger"
+                @click="toggleSort"
+                aria-haspopup="listbox"
+                :aria-expanded="isSortOpen ? 'true' : 'false'"
             >
-                <option value="downloads">Most downloads</option>
-                <option value="updated">Recently updated</option>
-                <option value="title">Title (A–Z)</option>
-            </select>
+                <span class="sort-label">Sort by</span>
+                <span class="sort-value">{{ currentSortLabel }}</span>
+                <span class="sort-chevron">▾</span>
+            </button>
+
+            <div v-if="isSortOpen" class="sort-menu" role="listbox">
+                <button
+                    v-for="opt in sortOptions"
+                    :key="opt.value"
+                    type="button"
+                    class="sort-option"
+                    :class="{ active: opt.value === localSort }"
+                    role="option"
+                    @click="pickSort(opt.value)"
+                >
+                    {{ opt.label }}
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -93,19 +107,29 @@ import {
 } from "vue";
 import Tag from "./Tag.vue";
 
+type SortValue = "downloads" | "updated" | "title";
+
 const props = defineProps<{
     tags: string[];
     allTags: string[];
-    sort: "downloads" | "updated" | "title";
+    sort: SortValue;
 }>();
 
 const emit = defineEmits<{
     (e: "update:tags", v: string[]): void;
-    (e: "update:sort", v: "downloads" | "updated" | "title"): void;
+    (e: "update:sort", v: SortValue): void;
 }>();
 
-/* ---- SORT LOCAL STATE ---- */
-const localSort = ref(props.sort);
+/* ---- SORT STATE ---- */
+const localSort = ref<SortValue>(props.sort);
+const isSortOpen = ref(false);
+const sortRootEl = ref<HTMLElement | null>(null);
+
+const sortOptions: { value: SortValue; label: string }[] = [
+    { value: "downloads", label: "Most downloads" },
+    { value: "updated", label: "Recently updated" },
+    { value: "title", label: "Title (A–Z)" },
+];
 
 watch(
     () => props.sort,
@@ -114,7 +138,26 @@ watch(
     },
 );
 
-/* ---- TAG SEARCH LOCAL STATE ---- */
+const currentSortLabel = computed(() => {
+    return (
+        sortOptions.find((o) => o.value === localSort.value)?.label ??
+        "Most downloads"
+    );
+});
+
+function toggleSort() {
+    isSortOpen.value = !isSortOpen.value;
+}
+
+function pickSort(v: SortValue) {
+    if (localSort.value !== v) {
+        localSort.value = v;
+        emit("update:sort", v);
+    }
+    isSortOpen.value = false;
+}
+
+/* ---- TAG SEARCH STATE ---- */
 const tagQuery = ref("");
 const isTagFocus = ref(false);
 const activeIndex = ref(0);
@@ -199,13 +242,17 @@ function commitActive() {
     addTag(choice);
 }
 
-/* ---- OUTSIDE CLICK TO CLOSE SUGGESTIONS ---- */
+/* ---- OUTSIDE CLICK HANDLER ---- */
 function onDocPointerDown(e: PointerEvent) {
-    const root = tagSearchEl.value;
-    if (!root) return;
+    const target = e.target as Node;
+    const tagRoot = tagSearchEl.value;
+    const sortRoot = sortRootEl.value;
 
-    if (!root.contains(e.target as Node)) {
+    if (tagRoot && !tagRoot.contains(target)) {
         closeSuggestions();
+    }
+    if (sortRoot && !sortRoot.contains(target)) {
+        isSortOpen.value = false;
     }
 }
 
@@ -216,11 +263,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
     document.removeEventListener("pointerdown", onDocPointerDown);
 });
-
-/* ---- SORT HANDLER ---- */
-function onSortChange() {
-    emit("update:sort", localSort.value);
-}
 </script>
 
 <style scoped>
@@ -344,26 +386,105 @@ function onSortChange() {
     font-size: 0.9rem;
 }
 
-/* ---- SORT DROPDOWN ---- */
+/* ---- SORT DROPDOWN (custom, matches tag menu) ---- */
 .sort-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* trigger pill */
+.sort-trigger {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-}
 
-.sort-label {
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.sort-select {
-    height: 34px;
     padding: 4px 10px;
     border-radius: 9px;
+
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
+
     font-size: 0.9rem;
     cursor: pointer;
+
+    outline: none;
+    border-width: 1px;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.05s ease;
+}
+
+.sort-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+.sort-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.sort-value {
+    font-weight: 600;
+}
+
+.sort-chevron {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* dropdown menu, styled like tag suggestions */
+.sort-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 22;
+
+    min-width: 210px;
+    padding: 8px;
+
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* individual sort options, same feel as chips list */
+.sort-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+
+    padding: 6px 8px;
+    border-radius: 6px;
+
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 0.85rem;
+
+    cursor: pointer;
+
+    transition:
+        background 0.12s ease,
+        transform 0.05s ease,
+        opacity 0.12s ease;
+}
+
+.sort-option:hover {
+    background: rgba(100, 150, 255, 0.16);
+    opacity: 1;
+}
+
+.sort-option.active {
+    background: rgba(100, 150, 255, 0.24);
+    opacity: 1;
 }
 </style>

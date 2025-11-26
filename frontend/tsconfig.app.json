@@ -1,16 +1,30 @@
+/* tsconfig.app.json */
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
+
   "compilerOptions": {
+    /* Where TypeScript stores incremental build info */
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /* TS + Vite environment types */
     "types": ["vite/client"],
 
-    /* Linting */
+    /* Strong compile-time safety */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* === PATH / ALIAS SUPPORT === */
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
+
+  /* Include TS, TSX, and Vue SFCs */
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

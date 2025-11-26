@@ -1,0 +1,73 @@
+:root {
+    /* ==========================================================================
+       Core Palette
+       --------------------------------------------------------------------------
+       Base colors for the theme. UI tokens below should derive from these.
+       ========================================================================== */
+
+    --color-bg: #1a1f2e; /* deep navy background */
+    --color-surface: #22283a; /* slate panel surface */
+    --color-accent: #eac15a; /* warm gold accent */
+    --color-accent2: #5c8be0; /* cool blue accent */
+    --color-accent3: #3e6bc9; /* royal blue accent */
+
+    /* ==========================================================================
+       Semantic UI Colors
+       --------------------------------------------------------------------------
+       High-level colors used throughout the app. These should be the main
+       interface tokens consumed by components.
+       ========================================================================== */
+
+    /* Backgrounds */
+    --ui-bg-deep: var(--color-bg); /* app shell, page background */
+    --ui-bg: #202636; /* slightly lighter than bg-deep */
+    --ui-surface: var(--color-surface); /* cards, panels, dropdowns */
+    --ui-surface-alt: #262d40; /* subtle alt surface variant */
+
+    /* Text */
+    --ui-text: #f5f7ff; /* primary text on dark backgrounds */
+    --ui-text-muted: rgba(245, 247, 255, 0.72);
+    --ui-text-subtle: rgba(245, 247, 255, 0.56);
+
+    /* Borders & Dividers */
+    --ui-border: rgba(255, 255, 255, 0.14); /* default soft border */
+    --ui-border-strong: rgba(255, 255, 255, 0.24);
+    --ui-divider: rgba(255, 255, 255, 0.08);
+
+    /* Accents (mapped to base palette) */
+    --ui-accent: var(--color-accent); /* primary accent (gold) */
+    --ui-accent-soft: rgba(234, 193, 90, 0.18);
+
+    --ui-blue-bright: var(--color-accent2); /* primary blue accent */
+    --ui-blue-hover: #7fa3e7; /* lighter hover tone from accent2/accent3 */
+    --ui-blue-soft: rgba(92, 139, 224, 0.18);
+
+    /* Status (generic, but tuned for this palette) */
+    --ui-success: #4ac18e;
+    --ui-success-soft: rgba(74, 193, 142, 0.18);
+
+    --ui-warning: #e6b450;
+    --ui-warning-soft: rgba(230, 180, 80, 0.18);
+
+    --ui-danger: #f06272;
+    --ui-danger-soft: rgba(240, 98, 114, 0.2);
+
+    /* ==========================================================================
+       Accent Gradients (High-level)
+       --------------------------------------------------------------------------
+       Simple semantic gradients derived from the core accent colors. More
+       complex layered gradients can live in gradients.css.
+       ========================================================================== */
+
+    --ui-accent-gradient: linear-gradient(
+        135deg,
+        var(--color-accent),
+        var(--color-accent2)
+    );
+
+    --ui-blue-gradient: linear-gradient(
+        135deg,
+        var(--color-accent2),
+        var(--color-accent3)
+    );
+}
