@@ -170,7 +170,7 @@ const truncatedDesc = computed(() => {
 
     background: var(--surface-gradient);
     border: 2px solid var(--surface-border);
-    border-radius: 16px;
+    border-radius: var(--ui-radius-xl);
     overflow: hidden;
     cursor: pointer;
     display: flex;
@@ -197,7 +197,7 @@ const truncatedDesc = computed(() => {
     /* keep the same gradient family so heart/star area stays consistent */
     background: var(--surface-gradient);
 
-    border-color: rgba(255, 255, 255, 0.14);
+    border-color: var(--ui-border-strong);
 
     box-shadow:
         0 16px 32px rgba(0, 0, 0, 0.45),
@@ -257,74 +257,77 @@ const truncatedDesc = computed(() => {
 
 /* ---------------- Shared content ---------------- */
 .info {
-    padding: 16px 20px 18px;
+    padding: var(--space-4) var(--space-5) var(--space-4);
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
 
 .title {
-    font-size: 1.55rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -0.25px;
+    font-family: var(--ui-font-heading);
+    font-size: var(--font-2xl);
+    font-weight: var(--ui-heading-weight);
+    color: var(--ui-text);
+    letter-spacing: var(--tracking-tight);
     margin: 0;
 }
 
 .creator {
-    opacity: 0.75;
-    font-size: 1rem;
+    color: var(--ui-text-muted);
+    font-size: var(--font-sm);
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
     white-space: nowrap;
     line-height: 1;
 }
 
 .type-badge {
-    font-size: 1rem;
-    padding: 8px 8px;
-    border-radius: 6px;
-    background: rgba(100, 150, 255, 0.18);
-    border: 1px solid rgba(100, 150, 255, 0.38);
-    color: var(--color-accent2);
-    font-weight: 800;
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
+    padding: var(--space-2) var(--space-2);
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-blue-soft);
+    border: 1px solid var(--ui-blue-bright);
+    color: var(--ui-blue-bright);
+    font-weight: var(--weight-semibold);
 }
 
-/* Tags containers (keep) */
+/* Tags containers */
 .tags,
 .tags-inline {
     display: flex;
-    gap: 8px;
+    gap: var(--gap-sm);
     flex-wrap: wrap;
 }
 
 .tags {
-    margin-top: 8px;
+    margin-top: var(--space-2);
 }
 
 /* Description */
 .desc {
-    margin-top: 10px;
+    margin-top: var(--space-3);
+    color: var(--ui-text);
     opacity: 0.92;
-    font-size: 1.25rem;
-    line-height: 1.45;
+    font-size: var(--font-md);
+    line-height: var(--line-normal);
 }
 
 /* Stats */
 .stats {
-    margin-top: 14px;
-    font-size: 0.95rem;
-    opacity: 0.85;
+    margin-top: var(--space-3);
+    font-size: var(--font-sm);
+    color: var(--ui-text-muted);
     display: flex;
-    gap: 10px;
+    gap: var(--space-3);
     align-items: center;
 }
 
 .stat {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
 }
 
 .dot {
@@ -335,14 +338,14 @@ const truncatedDesc = computed(() => {
 .item-card.list {
     flex-direction: row;
     height: 180px;
-    padding-right: 90px;
+    padding-right: 90px; /* keeps room for actions-right */
 }
 
 .item-card.list .thumb-wrap {
     width: 260px;
     height: 100%;
     flex: 0 0 260px;
-    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    border-right: 1px solid var(--ui-divider);
 }
 
 .list-info {
@@ -353,35 +356,35 @@ const truncatedDesc = computed(() => {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: var(--space-3);
     line-height: 1.15;
 }
 
 .list-stats {
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: var(--space-2);
 }
 
 /* ---------------- Right-Side Actions ---------------- */
 .actions-right {
     position: absolute;
-    right: 20px;
+    right: var(--space-5);
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: var(--space-3);
 }
 
 .action-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: var(--space-8); /* 40px */
+    height: var(--space-8);
+    border-radius: var(--ui-radius-lg);
     display: grid;
     place-items: center;
     background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: white;
+    border: 1px solid var(--ui-border);
+    color: var(--ui-text);
     cursor: pointer;
     transition:
         background 0.15s ease,
@@ -391,7 +394,7 @@ const truncatedDesc = computed(() => {
 
 .action-btn:hover {
     background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: var(--ui-border-strong);
 }
 
 .action-btn:active {
@@ -411,7 +414,7 @@ const truncatedDesc = computed(() => {
 .top-line {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-3);
 }
 
 .item-card.grid .grid-desc {
@@ -434,7 +437,7 @@ const truncatedDesc = computed(() => {
         height: 190px;
         flex: 0 0 auto;
         border-right: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid var(--ui-divider);
     }
 
     .actions-right {
@@ -442,21 +445,21 @@ const truncatedDesc = computed(() => {
         transform: none;
         flex-direction: row;
         justify-content: flex-end;
-        padding: 10px 14px 0;
+        padding: var(--space-3) var(--space-4) 0;
         margin-left: auto;
-        gap: 10px;
+        gap: var(--space-3);
     }
 
     .title {
-        font-size: 1.4rem;
+        font-size: var(--font-xl);
     }
 
     .desc {
-        font-size: 0.95rem;
+        font-size: var(--font-sm);
     }
 
     .stats {
-        font-size: 0.88rem;
+        font-size: var(--font-xs);
     }
 }
 </style>

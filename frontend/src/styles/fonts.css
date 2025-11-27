@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Font Loading (Inter)
+   --------------------------------------------------------------------------
+   These @font-face rules load the Inter variable font. You can place your
+   .woff2 file inside /public/fonts or adjust the path to match your project.
+   ========================================================================== */
+
+@font-face {
+    font-family: "Inter";
+    src: url("../assets/fonts/inter-var.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==========================================================================
+   Typography & Font Tokens
+   --------------------------------------------------------------------------
+   Defines font families, typography scale, weights, and line-heights used
+   across the UI. All components should consume these tokens for consistent
+   text styling.
+   ========================================================================== */
+
+:root {
+    /* ----------------------------------------------------------------------
+       Font Families
+       ---------------------------------------------------------------------- */
+    --ui-font-body: "Inter", system-ui, sans-serif;
+    --ui-font-heading: var(--ui-font-body);
+
+    /* ----------------------------------------------------------------------
+       Font Size Scale
+       ---------------------------------------------------------------------- */
+    --font-xs: 0.75rem; /* 12px */
+    --font-sm: 0.875rem; /* 14px */
+    --font-md: 1rem; /* 16px (base) */
+    --font-lg: 1.125rem; /* 18px */
+    --font-xl: 1.25rem; /* 20px */
+    --font-2xl: 1.5rem; /* 24px */
+    --font-3xl: 1.875rem; /* 30px */
+    --font-4xl: 2.25rem; /* 36px */
+
+    /* ----------------------------------------------------------------------
+       Line Heights
+       ---------------------------------------------------------------------- */
+    --line-tight: 1.1;
+    --line-normal: 1.4;
+    --line-relaxed: 1.6;
+
+    /* ----------------------------------------------------------------------
+       Font Weights
+       ---------------------------------------------------------------------- */
+    --weight-thin: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* ----------------------------------------------------------------------
+       Letter Spacing
+       ---------------------------------------------------------------------- */
+    --tracking-tight: -0.01em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.02em;
+
+    /* ----------------------------------------------------------------------
+       Semantic Typography Tokens
+       ---------------------------------------------------------------------- */
+
+    /* Body text */
+    --ui-text-body-size: var(--font-md);
+    --ui-text-body-line: var(--line-normal);
+    --ui-text-body-weight: var(--weight-regular);
+
+    /* Small text (metadata, subtle UI text) */
+    --ui-text-muted-size: var(--font-sm);
+    --ui-text-muted-line: var(--line-normal);
+    --ui-text-muted-weight: var(--weight-regular);
+
+    /* Headings */
+    --ui-heading-1-size: var(--font-3xl);
+    --ui-heading-2-size: var(--font-2xl);
+    --ui-heading-3-size: var(--font-xl);
+    --ui-heading-line: var(--line-tight);
+    --ui-heading-weight: var(--weight-semibold);
+
+    /* Labels / buttons */
+    --ui-label-size: var(--font-sm);
+    --ui-label-weight: var(--weight-medium);
+}

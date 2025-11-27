@@ -26,7 +26,8 @@
                 </button>
             </div>
         </header>
-        <CardGrid display_mode="grid">
+
+        <CardGrid :display_mode="display_mode">
             <ItemCard
                 v-for="p in assets"
                 :key="p.title"
@@ -65,48 +66,48 @@ function openItem(a: AssetItem) {
 
 <style scoped>
 .browse-header {
-    margin-bottom: 14px;
+    margin-bottom: var(--section-header-gap, 14px);
 }
 
 .header-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1.75rem;
-    gap: 12px;
+    font-size: var(--browse-title-font-size, 1.75rem);
+    gap: var(--browse-header-gap, 12px);
 }
 
 .sub {
-    opacity: 0.7;
-    margin-top: 4px;
-    font-size: 0.95rem;
+    opacity: var(--text-muted-opacity, 0.7);
+    margin-top: var(--browse-sub-margin-top, 4px);
+    font-size: var(--browse-sub-font-size, 0.95rem);
 }
 
 .filter-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    height: 34px;
-    padding: 0 12px;
-    border-radius: 9px;
+    gap: var(--btn-gap, 6px);
+    height: var(--btn-height-sm, 34px);
+    padding: 0 var(--btn-padding-x-sm, 12px);
+    border-radius: var(--radius-md, 9px);
 
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--color-accent2);
-    font-weight: 700;
-    font-size: 0.9rem;
+    background: var(--btn-secondary-bg, rgba(255, 255, 255, 0.06));
+    border: 1px solid var(--btn-secondary-border, rgba(255, 255, 255, 0.1));
+    color: var(--btn-secondary-fg, var(--color-accent2));
+    font-weight: var(--btn-secondary-font-weight, 700);
+    font-size: var(--btn-secondary-font-size, 0.9rem);
 
     cursor: pointer;
     transition:
-        background 0.15s ease,
-        transform 0.05s ease;
+        background var(--transition-fast, 0.15s ease),
+        transform var(--transition-ultra-fast, 0.05s ease);
 }
 
 .filter-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--btn-secondary-hover-bg, rgba(255, 255, 255, 0.1));
 }
 
 .filter-btn:active {
-    transform: translateY(1px);
+    transform: translateY(var(--btn-secondary-active-translate-y, 1px));
 }
 </style>

@@ -269,8 +269,10 @@ onBeforeUnmount(() => {
 .filters-cluster {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1rem;
+    gap: var(--space-3);
+    font-family: var(--ui-font-body);
+    font-size: var(--font-md);
+    color: var(--ui-text);
 }
 
 /* ---- TAG MULTI-SEARCH ---- */
@@ -279,12 +281,15 @@ onBeforeUnmount(() => {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px;
-    min-height: 34px;
-    padding: 4px 8px;
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: var(--space-2);
+
+    min-height: 34px; /* visual target size; OK to keep px */
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--ui-radius-lg);
+
+    background: var(--ui-surface-alt);
+    border: 1px solid var(--ui-border);
+
     cursor: text;
 
     width: 500px;
@@ -296,12 +301,13 @@ onBeforeUnmount(() => {
 .tag-search input {
     flex: 1 1 140px;
     min-width: 140px;
-    height: 24px;
+    height: 24px; /* keeps a stable visual line; OK to keep px */
     background: transparent;
     border: none;
     outline: none;
-    color: white;
-    font-size: 0.9rem;
+    color: var(--ui-text);
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
 }
 .tag-search input::placeholder {
     opacity: 0.6;
@@ -312,20 +318,21 @@ onBeforeUnmount(() => {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: var(--space-2);
 
     width: auto;
     height: auto;
 
-    padding: 4px 10px;
-    border-radius: 999px;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--ui-radius-full);
 
-    background: rgba(100, 150, 255, 0.18);
-    border: 1px solid rgba(100, 150, 255, 0.35);
-    color: white;
+    background: var(--ui-blue-soft);
+    border: 1px solid var(--ui-blue-bright);
+    color: var(--ui-text);
 
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
+    font-weight: var(--weight-medium);
     line-height: 1;
     white-space: nowrap;
 
@@ -339,8 +346,13 @@ onBeforeUnmount(() => {
         transform 0.05s ease;
 }
 .clear-btn:hover {
-    background: rgba(140, 180, 255, 0.28);
-    border-color: rgba(140, 180, 255, 0.55);
+    background: rgba(
+        92,
+        139,
+        224,
+        0.32
+    ); /* slightly stronger than --ui-blue-soft */
+    border-color: var(--ui-blue-bright);
     opacity: 1;
 }
 .clear-btn:active {
@@ -357,14 +369,14 @@ onBeforeUnmount(() => {
 
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--space-2);
 
     margin: 0;
-    padding: 12px;
+    padding: var(--space-3);
 
-    background: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-lg);
 
     box-shadow:
         0 14px 40px rgba(0, 0, 0, 0.55),
@@ -376,14 +388,14 @@ onBeforeUnmount(() => {
 
 .suggestion-chip.active :deep(.tag),
 .suggestion-chip.active {
-    background: rgba(100, 150, 255, 0.22);
+    background: var(--ui-blue-soft);
     opacity: 1;
 }
 
 .suggestion-empty {
-    padding: 6px 8px;
+    padding: var(--space-2) var(--space-2);
     opacity: 0.6;
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
 }
 
 /* ---- SORT DROPDOWN (custom, matches tag menu) ---- */
@@ -397,43 +409,44 @@ onBeforeUnmount(() => {
 .sort-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
 
-    padding: 4px 10px;
-    border-radius: 9px;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--ui-radius-lg);
 
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--ui-surface-alt);
+    border: 1px solid var(--ui-border);
+    color: var(--ui-text);
 
-    font-size: 0.9rem;
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
     cursor: pointer;
 
     outline: none;
-    border-width: 1px;
 
     transition:
         background 0.15s ease,
         border-color 0.15s ease,
-        transform 0.05s ease;
+        transform 0.05s ease,
+        opacity 0.15s ease;
 }
 
 .sort-trigger:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--ui-border-strong);
 }
 
 .sort-label {
-    font-size: 0.8rem;
-    opacity: 0.8;
+    font-size: var(--font-xs);
+    color: var(--ui-text-muted);
 }
 
 .sort-value {
-    font-weight: 600;
+    font-weight: var(--weight-medium);
 }
 
 .sort-chevron {
-    font-size: 0.75rem;
+    font-size: var(--font-xs);
     opacity: 0.7;
 }
 
@@ -445,11 +458,11 @@ onBeforeUnmount(() => {
     z-index: 22;
 
     min-width: 210px;
-    padding: 8px;
+    padding: var(--space-2);
 
-    background: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-md);
 
     box-shadow:
         0 14px 40px rgba(0, 0, 0, 0.55),
@@ -462,13 +475,14 @@ onBeforeUnmount(() => {
     width: 100%;
     text-align: left;
 
-    padding: 6px 8px;
-    border-radius: 6px;
+    padding: var(--space-2);
+    border-radius: var(--ui-radius-sm);
 
     background: transparent;
     border: none;
-    color: white;
-    font-size: 0.85rem;
+    color: var(--ui-text);
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
 
     cursor: pointer;
 
@@ -479,12 +493,12 @@ onBeforeUnmount(() => {
 }
 
 .sort-option:hover {
-    background: rgba(100, 150, 255, 0.16);
+    background: var(--ui-blue-soft);
     opacity: 1;
 }
 
 .sort-option.active {
-    background: rgba(100, 150, 255, 0.24);
+    background: var(--ui-blue-soft);
     opacity: 1;
 }
 </style>

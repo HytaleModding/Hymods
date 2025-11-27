@@ -4,7 +4,11 @@
         <div class="nav-inner">
             <!-- Left: Logo (Home button) -->
             <router-link to="/" class="brand" aria-label="Go to home">
-                <h1 class="logo">hytl.shop</h1>
+                <img
+                    src="../assets/images/logo.png"
+                    alt="CreateHT"
+                    class="brand-logo"
+                />
             </router-link>
 
             <!-- Center cluster: Tabs + Search -->
@@ -135,22 +139,34 @@ function goSearch() {
 
 <style scoped>
 .navbar {
-    position: sticky;
+    position: sticky; /* keeps navbar locked at top on scroll */
     top: 0;
-    z-index: 50;
-    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    left: 0;
+    right: 0;
+    z-index: var(--nav-z-index, 50);
+    background: color-mix(
+        in srgb,
+        var(--navbar-bg, var(--color-surface)) 92%,
+        transparent
+    );
+    backdrop-filter: blur(var(--nav-blur, 8px));
+    border-bottom: 1px solid
+        var(--border-subtle-strong, rgba(255, 255, 255, 0.06));
 }
 
 .nav-inner {
-    max-width: 1300px;
+    max-width: var(--layout-max-width, 1250px);
     margin: 0 auto;
-    padding: 12px 18px;
+    padding: var(--nav-padding-y, 12px) var(--nav-padding-x, 18px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--nav-gap, 12px);
+}
+
+.brand-logo {
+    height: 40px; /* scale the image */
+    width: auto; /* keep proportions */
 }
 
 /* Brand as home button */
@@ -158,101 +174,102 @@ function goSearch() {
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    padding: 4px 6px;
-    border-radius: 8px;
-    transition: background 0.15s ease;
+    padding: var(--brand-padding-y, 4px) var(--brand-padding-x, 6px);
+    border-radius: var(--radius-sm, 8px);
+    transition: background var(--transition-fast, 0.15s ease);
+    height: 36px;
 }
 .brand:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--brand-hover-bg, rgba(255, 255, 255, 0.06));
 }
 .logo {
     margin: 0;
-    font-size: 1.3rem;
-    letter-spacing: 0.4px;
+    font-size: var(--logo-font-size, 1.3rem);
+    letter-spacing: var(--logo-letter-spacing, 0.4px);
     color: var(--color-accent);
-    font-weight: 800;
+    font-weight: var(--logo-font-weight, 800);
 }
 
 /* Encapsulated center group */
 .center-cluster {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 6px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    gap: var(--nav-center-gap, 10px);
+    padding: var(--nav-center-padding, 6px);
+    border-radius: var(--radius-lg, 12px);
+    background: var(--nav-center-bg, rgba(255, 255, 255, 0.04));
+    border: 1px solid var(--nav-center-border, rgba(255, 255, 255, 0.06));
     margin: 0 auto;
 }
 
 /* Tabs */
 .type-tabs {
     display: flex;
-    gap: 6px;
-    padding-right: 8px;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    gap: var(--tab-gap, 6px);
+    padding-right: var(--tab-group-padding-right, 8px);
+    border-right: 1px solid
+        var(--border-subtle-strong, rgba(255, 255, 255, 0.1));
 }
 
 .tab {
     position: relative;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.92rem;
-    padding: 7px 12px;
-    border-radius: 9px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
+    color: var(--tab-fg, rgba(255, 255, 255, 0.8));
+    font-size: var(--tab-font-size, 0.92rem);
+    padding: var(--tab-padding-y, 7px) var(--tab-padding-x, 12px);
+    border-radius: var(--tab-radius, 9px);
+    font-weight: var(--tab-font-weight, 600);
+    letter-spacing: var(--tab-letter-spacing, 0.2px);
     transition:
-        background 0.15s ease,
-        color 0.15s ease,
-        transform 0.05s ease;
+        background var(--transition-fast, 0.15s ease),
+        color var(--transition-fast, 0.15s ease),
+        transform var(--transition-ultra-fast, 0.05s ease);
 }
 
 .tab:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.06);
+    color: var(--tab-hover-fg, #ffffff);
+    background: var(--tab-hover-bg, rgba(255, 255, 255, 0.06));
 }
 
 /* Obvious active state (only on browse pages) */
 .tab.active {
-    color: white;
-    font-weight: 800;
-    background: linear-gradient(
-        180deg,
-        var(--color-accent2),
-        var(--color-accent3)
+    color: var(--tab-active-fg, #ffffff);
+    font-weight: var(--tab-active-font-weight, 800);
+    background: var(
+        --tab-active-bg,
+        linear-gradient(180deg, var(--color-accent2), var(--color-accent3))
     );
     box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-    transform: translateY(-1px);
+        var(--tab-active-shadow, 0 6px 16px rgba(0, 0, 0, 0.35)),
+        inset 0 0 0 1px
+            var(--tab-active-inner-border, rgba(255, 255, 255, 0.22));
+    transform: translateY(var(--tab-active-translate-y, -1px));
 }
 
 /* glow underline */
 .tab.active::after {
     content: "";
     position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: -6px;
-    height: 3px;
+    left: var(--tab-underline-inset, 10px);
+    right: var(--tab-underline-inset, 10px);
+    bottom: var(--tab-underline-offset, -6px);
+    height: var(--tab-underline-height, 3px);
     border-radius: 999px;
-    background: linear-gradient(
-        90deg,
-        var(--color-accent2),
-        var(--color-accent3)
+    background: var(
+        --tab-underline-bg,
+        linear-gradient(90deg, var(--color-accent2), var(--color-accent3))
     );
-    opacity: 0.9;
+    opacity: var(--tab-underline-opacity, 0.9);
 }
 
-/* Search (shorter) */
+/* Search */
 .search-wrap {
     display: flex;
     align-items: center;
-    width: min(340px, 38vw);
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 9px;
+    width: min(var(--search-max-width, 340px), 38vw);
+    background: var(--search-bg, rgba(0, 0, 0, 0.2));
+    border: 1px solid var(--search-border, rgba(255, 255, 255, 0.06));
+    border-radius: var(--radius-md, 9px);
     overflow: hidden;
 }
 
@@ -260,61 +277,61 @@ function goSearch() {
     flex: 1;
     background: transparent;
     border: none;
-    color: white;
-    padding: 8px 10px;
-    font-size: 0.95rem;
+    color: var(--search-fg, #ffffff);
+    padding: var(--search-padding-y, 8px) var(--search-padding-x, 10px);
+    font-size: var(--search-font-size, 0.95rem);
     outline: none;
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--search-placeholder, rgba(255, 255, 255, 0.55));
 }
 
 .search-btn {
     height: 100%;
-    padding: 8px 10px;
+    padding: var(--search-btn-padding-y, 8px) var(--search-btn-padding-x, 10px);
     background: transparent;
     border: none;
-    color: var(--color-accent2);
+    color: var(--search-icon-color, var(--color-accent2));
     cursor: pointer;
     display: grid;
     place-items: center;
-    transition: background 0.15s ease;
+    transition: background var(--transition-fast, 0.15s ease);
 }
 .search-btn:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--search-btn-hover-bg, rgba(255, 255, 255, 0.06));
 }
 
 /* Right actions */
 .right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--nav-right-gap, 10px);
 }
 .actions {
     display: flex;
-    gap: 6px;
+    gap: var(--nav-actions-gap, 6px);
 }
 
 .icon-btn {
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--color-accent2);
+    width: var(--icon-btn-size, 34px);
+    height: var(--icon-btn-size, 34px);
+    border-radius: var(--radius-md, 9px);
+    background: var(--icon-btn-bg, rgba(255, 255, 255, 0.06));
+    border: 1px solid var(--icon-btn-border, rgba(255, 255, 255, 0.08));
+    color: var(--icon-btn-color, var(--color-accent2));
     cursor: pointer;
     transition:
-        background 0.15s ease,
-        transform 0.05s ease;
+        background var(--transition-fast, 0.15s ease),
+        transform var(--transition-ultra-fast, 0.05s ease);
 }
 .icon-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--icon-btn-hover-bg, rgba(255, 255, 255, 0.1));
 }
 .icon-btn:active {
-    transform: translateY(1px);
+    transform: translateY(var(--icon-btn-active-translate-y, 1px));
 }
 
 /* Mobile */
@@ -323,7 +340,7 @@ function goSearch() {
         display: none;
     }
     .search-wrap {
-        width: 60vw;
+        width: var(--search-width-mobile, 60vw);
     }
 }
 </style>

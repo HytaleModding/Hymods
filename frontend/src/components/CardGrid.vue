@@ -194,13 +194,13 @@ function onPageSizeChange() {
 .card-grid-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--space-4);
 }
 
 /* GRID MODE = cap at 2 columns */
 .card-grid.grid {
     display: grid;
-    gap: 22px;
+    gap: var(--space-5);
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -215,33 +215,37 @@ function onPageSizeChange() {
 .card-grid.list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: var(--space-4);
 }
 
-/* pagination */
+/* ---------------- Pagination ---------------- */
 .pagination-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    font-size: 0.85rem;
-    opacity: 0.9;
+    gap: var(--space-3);
+
+    font-family: var(--ui-font-body);
+    font-size: var(--font-sm);
+    color: var(--ui-text-muted);
+    opacity: 0.95;
 }
 
 .pagination-info strong {
-    font-weight: 700;
+    font-weight: var(--weight-semibold);
+    color: var(--ui-text);
 }
 
 .pagination-controls {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
 }
 
 .page-size {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
 }
 
 .page-size-label {
@@ -249,32 +253,57 @@ function onPageSizeChange() {
 }
 
 .page-size-select {
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(255, 255, 255, 0.06);
-    color: white;
-    font-size: 0.85rem;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--ui-radius-lg);
+    border: 1px solid var(--ui-border);
+    background: var(--ui-surface-alt);
+    color: var(--ui-text);
+    font-size: var(--font-sm);
     cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease;
 }
 
+.page-size-select:hover,
+.page-size-select:focus-visible {
+    border-color: var(--ui-blue-bright);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------------- Pager buttons ---------------- */
 .pager-btn {
-    min-width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.06);
-    color: white;
-    font-size: 0.9rem;
+    min-width: var(--space-7); /* 32px */
+    height: var(--space-7);
+    border-radius: var(--ui-radius-full);
+    border: 1px solid var(--ui-border);
+    background: var(--ui-surface-alt);
+    color: var(--ui-text);
+    font-size: var(--font-sm);
     cursor: pointer;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.05s ease,
+        opacity 0.15s ease;
 }
+
 .pager-btn:disabled {
     opacity: 0.4;
     cursor: default;
 }
+
+.pager-btn:not(:disabled):hover {
+    background: var(--ui-blue-soft);
+    border-color: var(--ui-blue-bright);
+}
+
 .pager-btn:not(:disabled):active {
     transform: translateY(1px);
 }
@@ -282,5 +311,6 @@ function onPageSizeChange() {
 .page-indicator {
     font-variant-numeric: tabular-nums;
     opacity: 0.9;
+    color: var(--ui-text-muted);
 }
 </style>

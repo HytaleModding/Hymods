@@ -1,4 +1,70 @@
+/* ==========================================================================
+   Spacing & Radius Tokens
+   --------------------------------------------------------------------------
+   Consistent spacing, padding, margin, and radius variables used throughout
+   the UI. Follows a predictable 4/8px scale for clarity and maintainability.
+   ========================================================================== */
+
 :root {
+    /* ----------------------------------------------------------------------
+       Base Spacing Scale
+       These are the core building blocks. Use these for margins, gaps, and
+       component-specific spacing.
+       ---------------------------------------------------------------------- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px; /* optional middle size */
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 40px;
+    --space-9: 48px;
+    --space-10: 64px;
+
+    /* ----------------------------------------------------------------------
+       Padding Presets
+       Component-friendly padding sets. These follow your existing pattern
+       (`--ui-padding`) while providing scalable variants.
+       ---------------------------------------------------------------------- */
+
+    /* You already had this — keeping it */
     --ui-padding: 8px 12px;
-    --ui-radius: 6px;
+
+    /* Extra presets */
+    --ui-padding-xs: 4px 8px;
+    --ui-padding-sm: 6px 10px;
+    --ui-padding-md: 8px 12px; /* same as --ui-padding */
+    --ui-padding-lg: 12px 16px;
+    --ui-padding-xl: 16px 20px;
+
+    /* ----------------------------------------------------------------------
+       Radius Scale
+       Clean radius system you can plug into components.
+       ---------------------------------------------------------------------- */
+    --ui-radius-xs: 2px;
+    --ui-radius-sm: 4px;
+    --ui-radius-md: 6px; /* your existing --ui-radius */
+    --ui-radius-lg: 8px;
+    --ui-radius-xl: 12px;
+    --ui-radius-round: 50%;
+    --ui-radius-full: 9999px;
+
+    /* Preserve your existing token name */
+    --ui-radius: var(--ui-radius-md);
+
+    /* ----------------------------------------------------------------------
+       Gaps (for flex/grid layouts)
+       ---------------------------------------------------------------------- */
+    --gap-xs: var(--space-1); /* 4px */
+    --gap-sm: var(--space-2); /* 8px */
+    --gap-md: var(--space-3); /* 12px */
+    --gap-lg: var(--space-4); /* 16px */
+    --gap-xl: var(--space-6); /* 24px */
+
+    /* ----------------------------------------------------------------------
+       Sizes (useful for layout spacing)
+       ---------------------------------------------------------------------- */
+    --container-padding: var(--space-4); /* 16px page padding */
+    --section-spacing: var(--space-8); /* 40px spacing between major sections */
 }

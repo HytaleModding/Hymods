@@ -65,53 +65,60 @@ function onClick() {
 .tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--gap-xs);
 
-    font-size: 0.9rem;
-    padding: 4px 8px;
-    border-radius: 6px;
+    font-family: var(--ui-font-body);
+    font-size: var(--ui-label-size);
+    font-weight: var(--ui-label-weight);
+    line-height: 1;
 
-    background: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: var(--color-accent2);
-    font-weight: 800;
-    opacity: 0.8;
+    padding: var(--ui-padding-xs);
+    border-radius: var(--ui-radius-sm);
+
+    background: var(--ui-surface-alt);
+    border: 1px solid var(--ui-border);
+    color: var(--ui-blue-bright);
+    opacity: 0.9;
 
     white-space: nowrap;
-    line-height: 1;
     user-select: none;
 }
 
 /* ---------------- Sizes ---------------- */
 .tag--sm {
-    font-size: 0.82rem;
-    padding: 3px 7px;
+    font-size: var(--font-xs);
+    padding: 2px var(--space-2);
+    border-radius: var(--ui-radius-xs);
 }
 
 .tag--md {
-    font-size: 0.9rem;
-    padding: 4px 8px;
+    font-size: var(--ui-label-size);
+    padding: var(--ui-padding-xs);
+    border-radius: var(--ui-radius-sm);
 }
 
 .tag--lg {
-    font-size: 1.05rem;
-    padding: 6px 12px;
+    font-size: var(--font-md);
+    padding: 4px var(--space-3);
+    border-radius: var(--ui-radius-md);
 }
 
 /* ---------------- Clickable hover/active ---------------- */
 .tag--clickable {
     cursor: pointer;
     transition:
-        background 0.15s ease,
+        background-color 0.15s ease,
         border-color 0.15s ease,
         opacity 0.15s ease,
-        transform 0.05s ease;
+        transform 0.05s ease,
+        box-shadow 0.15s ease;
 }
 
 .tag--clickable:hover {
     opacity: 1;
-    background: rgba(100, 150, 255, 0.22);
-    border-color: rgba(100, 150, 255, 0.45);
+    background: var(--ui-blue-soft);
+    border-color: var(--ui-blue-bright);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .tag--clickable:active {
@@ -138,11 +145,10 @@ function onClick() {
 
 /* ---------------- Removable X ---------------- */
 .tag__x {
-    border: none;
-    background: transparent;
+    /* global button baseline already nukes default styles */
     color: inherit;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--font-sm);
     padding: 0;
     opacity: 0.75;
     line-height: 1;
